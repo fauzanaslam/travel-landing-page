@@ -1,24 +1,33 @@
 "use client";
 
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import Button from "../(global)/Button";
+import React, { useEffect, useState, useRef } from "react";
+import Button from "../Button";
 import { FaBars, FaXmark } from "react-icons/fa6";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      if (isMenuOpen && !event.target.closest(".navbar-container")) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    const handleScroll = () => {
+      if (isMenuOpen) {
         setIsMenuOpen(false);
       }
     };
 
     document.addEventListener("click", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
       document.removeEventListener("click", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [isMenuOpen]);
 
@@ -72,6 +81,7 @@ const Navbar = () => {
         </div>
       </nav>
       <div
+        ref={menuRef}
         className={`${
           isMenuOpen ? "inline-block fixed w-full" : "hidden"
         } text-dark bg-primary z-30`}
