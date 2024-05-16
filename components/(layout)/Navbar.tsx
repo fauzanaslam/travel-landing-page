@@ -51,7 +51,7 @@ const Navbar = () => {
             Traveling<span className="text-primary">Yuk</span>
           </h2>
         </Link>
-        <ul className="hidden md:flex gap-12 h-full">
+        <ul className="hidden md:flex gap-12">
           {navItem.map((link) => (
             <Link
               href={link.href}
@@ -83,7 +83,9 @@ const Navbar = () => {
       <div
         ref={menuRef}
         className={`${
-          isMenuOpen ? "inline-block fixed w-full" : "hidden"
+          isMenuOpen
+            ? "scale-y-[1] duration-300 origin-top"
+            : "scale-y-0 duration-300 origin-top"
         } text-dark bg-primary z-30`}
       >
         <div className="grid text-center">
