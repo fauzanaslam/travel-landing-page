@@ -84,8 +84,8 @@ const Navbar = () => {
         ref={menuRef}
         className={`${
           isMenuOpen
-            ? "scale-y-[1] duration-300 origin-top"
-            : "scale-y-0 duration-300 origin-top"
+            ? "scale-y-[1] duration-300 origin-top fixed w-full"
+            : "scale-y-0 duration-300 origin-top fixed w-full"
         } text-dark bg-primary z-30`}
       >
         <div className="grid text-center">
